@@ -8,13 +8,13 @@ I built this framework to practice real-world API testing using **Java, RestAssu
 
 ## Tech Stack
 
-- Java
+- Java 25
 - RestAssured
 - TestNG
 - Maven
 - Allure Report
 - POJO + Form Parameters
-- Page Object style structure (Endpoints + Payload)
+- Endpoint and payload class per API area (same separation idea as Page Object Model)
 
 ---
 
@@ -26,6 +26,8 @@ src/test/java/
 ├── payload/            → POJO classes (User)
 ├── tests/              → Test classes
 └── utilities/          → TestData + TestDataHelper
+
+docs/                   → Report screenshots used in this README
 ```
 
 ---
@@ -33,6 +35,7 @@ src/test/java/
 ## Features
 
 - Clean and reusable endpoint methods
+- Request and response specifications defined once in `BaseTest`
 - No hardcoding (all data in `TestData`)
 - POJO + Form Parameter support
 - Positive and Negative test cases
@@ -61,33 +64,50 @@ src/test/java/
 | 13 | Update User Account                            | Positive  | Done   |
 | 14 | Get User Detail by Email                       | Positive  | Done   |
 
+Current status: 14 of 14 tests passing, full suite runs in about 80 seconds.
+
+![Allure report](docs/allure-report.png)
+
 ---
 
 ## How to Run the Project
 
+Prerequisites: JDK 25, Maven, and an internet connection. No API key is required, the suite calls the public API directly.
+
 1. Clone the repository
 2. Open it in IntelliJ IDEA
-3. Make sure you have Java and Maven installed
+3. Make sure you have JDK 25 and Maven installed
 4. Run the tests using:
 
-```
-bash
+```bash
 mvn clean test
-Or run the testng.xml file directly from IntelliJ.
 ```
+
+You can also run `testng.xml` directly from IntelliJ.
+
 ### Generate Allure Report
 
 After running the tests, generate the report using:
 
-```
-bash
+```bash
 allure serve allure-results
 ```
+
+---
+
+## Known limitations
+
+- Runs against the live public API, so results depend on the internet and on the service being available.
+- No authentication token flow is tested; the suite covers the public endpoints used by the website.
+- Test data is created and deleted per run, so the suite needs a working internet connection to pass.
+
+---
+
 ## Author
 
-**Omar Monir**  
-Aspiring Software Tester / SDET
-
-I'm currently learning automation testing and building projects to improve my skills.
+**Omar Monir**
+Junior QA Automation Engineer
 
 - GitHub: [Omar-Monir](https://github.com/Omar-Monir)
+- LinkedIn: [omar-monir](https://linkedin.com/in/omar-monir-7191722b0)
+- Email: omonir446@gmail.com
